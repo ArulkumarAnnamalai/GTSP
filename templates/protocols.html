@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Telecommunication Protocols</h1>
+    <a href="{% url 'add_protocol' %}" class="add-button">+ Add Protocol</a>
+</div>
+
+<table>
+    <thead>
+        <tr><th>ID</th><th>Name</th><th>Description</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for protocol in protocols %}
+        <tr>
+            <td>{{ protocol.id }}</td>
+            <td>{{ protocol.name }}</td>
+            <td>{{ protocol.description }}</td>
+            <td>
+                <a class="edit" href="{% url 'edit_protocol' protocol.id %}">Edit</a>
+                <form method="POST" action="{% url 'delete_protocol' protocol.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No protocols found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

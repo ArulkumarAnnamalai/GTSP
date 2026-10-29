@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2>
+        {% if regulation %}Edit Regulation{% else %}Add Regulation{% endif %}
+    </h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Title</label>
+        <input type="text" name="title"
+               value="{{ regulation.title|default:'' }}" required>
+
+        <label>Description</label>
+        <textarea name="description" required>{{ regulation.description|default:'' }}</textarea>
+
+        <button type="submit">Save Regulation</button>
+    </form>
+</div>
+{% endblock %}

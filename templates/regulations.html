@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Regulatory Requirements</h1>
+    <a href="{% url 'add_regulation' %}" class="add-button">+ Add Regulation</a>
+</div>
+
+<table>
+    <thead>
+        <tr><th>ID</th><th>Title</th><th>Description</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for regulation in regulations %}
+        <tr>
+            <td>{{ regulation.id }}</td>
+            <td>{{ regulation.title }}</td>
+            <td>{{ regulation.description }}</td>
+            <td>
+                <a class="edit" href="{% url 'edit_regulation' regulation.id %}">Edit</a>
+                <form method="POST" action="{% url 'delete_regulation' regulation.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No regulations found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

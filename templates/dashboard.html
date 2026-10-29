@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>GTSP Dashboard</h1>
+    <p>Manage telecommunication standards and regulations.</p>
+
+    <div class="card-container">
+        <div class="dashboard-card">
+            <h2>Standards</h2>
+            <h3>{{ standards_count }}</h3>
+            <a href="{% url 'standards_page' %}">View Standards</a>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Protocols</h2>
+            <h3>{{ protocols_count }}</h3>
+            <a href="{% url 'protocols_page' %}">View Protocols</a>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Regulations</h2>
+            <h3>{{ regulations_count }}</h3>
+            <a href="{% url 'regulations_page' %}">View Regulations</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
